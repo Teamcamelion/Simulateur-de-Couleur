@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de Couleur</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Simulateur de Couleur</h1>
+            <p>Créez, explorez et testez vos couleurs en temps réel</p>
+        </header>
+
+        <main class="simulator">
+            <!-- Zone d'aperçu principal -->
+            <div class="preview-section">
+                <div class="color-preview" id="colorPreview">
+                    <div class="color-info">
+                        <div class="color-hex" id="colorHex">#FF6B6B</div>
+                        <div class="color-rgb" id="colorRgb">rgb(255, 107, 107)</div>
+                        <div class="color-hsl" id="colorHsl">hsl(0, 100%, 71%)</div>
+                    </div>
+                </div>
+                
+                <div class="contrast-info" id="contrastInfo">
+                    <div class="contrast-score">
+                        <span class="label">Contraste:</span>
+                        <span class="score" id="contrastScore">4.5:1</span>
+                    </div>
+                    <div class="accessibility" id="accessibility">✅ Accessible</div>
+                </div>
+            </div>
+
+            <!-- Contrôles de couleur -->
+            <div class="controls-section">
+                <!-- Sélecteur visuel -->
+                <div class="color-picker-container">
+                    <h3>Sélecteur Visuel</h3>
+                    <div class="color-picker-wrapper">
+                        <canvas id="colorPicker" width="300" height="200"></canvas>
+                        <div class="hue-slider-container">
+                            <input type="range" id="hueSlider" min="0" max="360" value="0" class="hue-slider">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contrôles numériques -->
+                <div class="numeric-controls">
+                    <h3>Valeurs Numériques</h3>
+                    
+                    <!-- RGB -->
+                    <div class="control-group">
+                        <label>RGB</label>
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label>R</label>
+                                <input type="number" id="redInput" min="0" max="255" value="255">
+                            </div>
+                            <div class="input-field">
+                                <label>G</label>
+                                <input type="number" id="greenInput" min="0" max="255" value="107">
+                            </div>
+                            <div class="input-field">
+                                <label>B</label>
+                                <input type="number" id="blueInput" min="0" max="255" value="107">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HSL -->
+                    <div class="control-group">
+                        <label>HSL</label>
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label>H</label>
+                                <input type="number" id="hueInput" min="0" max="360" value="0">
+                            </div>
+                            <div class="input-field">
+                                <label>S</label>
+                                <input type="number" id="saturationInput" min="0" max="100" value="100">
+                            </div>
+                            <div class="input-field">
+                                <label>L</label>
+                                <input type="number" id="lightnessInput" min="0" max="100" value="71">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hexadécimal -->
+                    <div class="control-group">
+                        <label>Hexadécimal</label>
+                        <div class="hex-input-container">
+                            <input type="text" id="hexInput" value="#FF6B6B" maxlength="7">
+                            <button id="copyHex" class="copy-btn">📋</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Palettes prédéfinies -->
+            <div class="palettes-section">
+                <h3>Palettes Prédéfinies</h3>
+                <div class="palette-grid">
+                    <div class="palette" data-palette="warm">
+                        <div class="palette-colors">
+                            <div class="palette-color" style="background: #FF6B6B;"></div>
+                            <div class="palette-color" style="background: #FF8E53;"></div>
+                            <div class="palette-color" style="background: #FF6B9D;"></div>
+                            <div class="palette-color" style="background: #C44569;"></div>
+                        </div>
+                        <span class="palette-name">Chaudes</span>
+                    </div>
+                    
+                    <div class="palette" data-palette="cool">
+                        <div class="palette-colors">
+                            <div class="palette-color" style="background: #4ECDC4;"></div>
+                            <div class="palette-color" style="background: #45B7D1;"></div>
+                            <div class="palette-color" style="background: #96CEB4;"></div>
+                            <div class="palette-color" style="background: #6C5CE7;"></div>
+                        </div>
+                        <span class="palette-name">Froides</span>
+                    </div>
+                    
+                    <div class="palette" data-palette="neutral">
+                        <div class="palette-colors">
+                            <div class="palette-color" style="background: #2D3436;"></div>
+                            <div class="palette-color" style="background: #636E72;"></div>
+                            <div class="palette-color" style="background: #B2BEC3;"></div>
+                            <div class="palette-color" style="background: #DDD6FE;"></div>
+                        </div>
+                        <span class="palette-name">Neutres</span>
+                    </div>
+                    
+                    <div class="palette" data-palette="vibrant">
+                        <div class="palette-colors">
+                            <div class="palette-color" style="background: #FFD93D;"></div>
+                            <div class="palette-color" style="background: #6BCF7F;"></div>
+                            <div class="palette-color" style="background: #4D96FF;"></div>
+                            <div class="palette-color" style="background: #FF6B9D;"></div>
+                        </div>
+                        <span class="palette-name">Vives</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions-section">
+                <button id="randomColor" class="action-btn">🎲 Couleur Aléatoire</button>
+                <button id="copyAll" class="action-btn">📋 Copier Tout</button>
+                <button id="resetColor" class="action-btn">🔄 Réinitialiser</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
